@@ -12,20 +12,24 @@ public class FizzBuzz {
      *         as described above
      * @throws IllegalArgumentException if the number is not in the 1-100 range.
      */
-public String toFizzBuzzString(int number) {
-    	
-    	String result = String.valueOf(number);
-    	if (number%3 == 0 ){
-    		result =  "Fizz";
-    	}
-    	if (number%5 == 0 ){
-    		result =  "Buzz";
-    	}
-    	if (number%15 == 0 ){
-    		result =  "FizzBuzz";
-    	}
-    	return result; 
+	public String toFizzBuzzString(int number) {
 
-    }
+		if (number < 1 || number > 100) {
+			throw new IllegalArgumentException("the number is not in the 1-100 range");
+		}
+
+		String result = String.valueOf(number);
+		if (number % 3 == 0) {
+			result = "Fizz";
+		}
+		if (number % 5 == 0) {
+			result = "Buzz";
+		}
+		if (number % 15 == 0) {
+			result = "FizzBuzz";
+		}
+		return result;
+
+	}
 
 }

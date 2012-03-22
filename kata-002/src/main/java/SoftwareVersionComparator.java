@@ -1,4 +1,5 @@
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class SoftwareVersionComparator implements Comparator<String> {
@@ -21,8 +22,24 @@ public class SoftwareVersionComparator implements Comparator<String> {
      *         if version1 is greater than version 2
      */
     @Override
-    public int compare(String version1, String version2) {
-        return 42; // TODO: implement me
-    }
+	public int compare(String version1, String version2) {
+		int result = 0;
+		String[]string1 = version1.split("\\.");
+		String[]string2 = version2.split("\\.");
+		for (int i = 0; i < string1.length; i++) {
+			int primaVersione = Integer.valueOf(string1[i]);
+			int secondaVersione = Integer.valueOf(string2[i]);
+			result =  primaVersione - secondaVersione ;
+			if (result > 0 || result < 0){ 
+				break;
+			}
+		}
+		if (result == 0){
+			// check external digit
+			result = string1.length - string2.length;
+		}
+
+		return result;
+	}
 
 }
