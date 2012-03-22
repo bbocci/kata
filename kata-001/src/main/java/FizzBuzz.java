@@ -12,8 +12,20 @@ public class FizzBuzz {
      *         as described above
      * @throws IllegalArgumentException if the number is not in the 1-100 range.
      */
-    public String toFizzBuzzString(int number) {
-        return ""; // TODO: implement me
+public String toFizzBuzzString(int number) {
+    	
+    	String result = String.valueOf(number);
+    	if (number%3 == 0 ){
+    		result =  "Fizz";
+    	}
+    	if (number%5 == 0 ){
+    		result =  "Buzz";
+    	}
+    	if (number%15 == 0 ){
+    		result =  "FizzBuzz";
+    	}
+    	return result; 
+
     }
 
 }
