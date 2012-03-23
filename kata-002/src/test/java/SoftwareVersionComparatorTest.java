@@ -38,6 +38,14 @@ public class SoftwareVersionComparatorTest {
         assertTrue("3.1.678.34.9,3.0.677.33.8", comparator.compare("3.1.678.34.9", "3.0.677.33.8") > 0);
         assertTrue("45.1.678.34.9,3.0.677.33.8", comparator.compare("45.1.678.34.9", "3.0.677.33.8") > 0);
         assertTrue("5.1.678.34.9,6.0.677.33.8", comparator.compare("5.1.678.34.9", "6.0.677.33.8") < 0);
+
+        // bastard check
+        assertTrue("1,1.0", comparator.compare("1", "1.0") == 0);
+        
+        // more bastard check
+        assertTrue("1.0.0,1", comparator.compare("1.0.0", "1") == 0);
+        // extreme bastard check
+        assertTrue("1.0.0.0.1.0,1", comparator.compare("1.0.0.0.1.0", "1") > 0);
     }
 
 }

@@ -1,5 +1,4 @@
-import java.security.SecureRandom;
-import java.util.Arrays;
+
 import java.util.Comparator;
 
 public class SoftwareVersionComparator implements Comparator<String> {
@@ -24,20 +23,39 @@ public class SoftwareVersionComparator implements Comparator<String> {
     @Override
 	public int compare(String version1, String version2) {
 		int result = 0;
-		String[]string1 = version1.split("\\.");
-		String[]string2 = version2.split("\\.");
+		String[] string1 = version1.split("\\.");
+		String[] string2 = version2.split("\\.");
 		for (int i = 0; i < string1.length; i++) {
-			int primaVersione = Integer.valueOf(string1[i]);
-			int secondaVersione = Integer.valueOf(string2[i]);
-			result =  primaVersione - secondaVersione ;
-			if (result > 0 || result < 0){ 
+			if (i+1 > string2.length){
 				break;
 			}
+			int primaVersione = Integer.valueOf(string1[i]);
+			int secondaVersione = Integer.valueOf(string2[i]);
+			result = primaVersione - secondaVersione;
+			if (result != 0) {
+				return result;
+			}
 		}
-		if (result == 0){
-			// check external digit
-			result = string1.length - string2.length;
+		
+		// if we are here result == 0
+		// check extra digit
+		result = string1.length - string2.length;
+		if(result != 0){
+			// local string
+			String localString;
+			// check if extra digits are zeros
+			if (result > 0){
+				//string1 > string2
+				localString = version1.substring(string2.length+1);			
+				
+			}else{
+				localString = version2.substring(string1.length+1);		
+			}				
+			localString = localString.replaceAll("\\.", "");
+			if (localString.matches("[0-0]*"))
+				return 0;
 		}
+	
 
 		return result;
 	}
